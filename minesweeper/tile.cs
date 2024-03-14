@@ -61,20 +61,21 @@ namespace minesweeper
             // reset to top and shift to the right when reaching the vertical limit
             if (current.Y >= height)
             {
-                // reset to top
+                // reset to top.
                 while (current.top != null) current = current.top;
-                // shift right
+                // shift right.
                 current.right = new tile(current.X + 1, 0);
                 leftConn = current;
                 current = current.right;
                 current.left = leftConn;
             }
-
+            // add tile to the current's bottom.
             if (current.Y < height)
             {
                 current.bottom = new tile(current.X, current.Y + 1);
                 current.bottom.top = current;
             }
+            // connect the tile horizontally if there is a tile to the left.
             if (current.X > 0)
             {
                 current.left = leftConn;
