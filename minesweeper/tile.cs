@@ -42,7 +42,7 @@ namespace minesweeper
             this.height = height;
             this.topLeft = new tile(0, 0);
             this.current = topLeft;
-            recursiveGridBuilder(width, height, current, null, null);
+            recursiveGridBuilder(width, height, current, null);
         }
         /// <summary>
         /// a method to recursively build a grid with the top-left tile as the beginning (0 index);
@@ -56,27 +56,34 @@ namespace minesweeper
         /// exit recursion when reaching the vertical and horizontal limit.
         ///     or recurse with the inhereted size and new current/prev.
         /// </algo>
-        private void recursiveGridBuilder(int width, int height, tile current, tile YPrev, tile XPrev)
+        private void recursiveGridBuilder(int width, int height, tile current, tile leftConn)
         {
             // reset to top and shift to the right when reaching the vertical limit
-            if (current.Y >= height - 1)
+            if (current.Y >= height)
             {
                 // reset to top
                 while (current.top != null) current = current.top;
                 // shift right
                 current.right = new tile(current.X + 1, 0);
+                leftConn = current;
                 current = current.right;
-                XPrev = current.left;
+                current.left = leftConn;
             }
-            // add tile to the current's bottom.
-            current.bottom = new tile(current.X, current.Y + 1);
-            // connect the tile horizontally if there is a tile to the left.
-            if (current.X > 0) current.left = XPrev;
 
-            // exit recursion when reaching the vertical and horizontal end point.
+            if (current.Y < height)
+            {
+                current.bottom = new tile(current.X, current.Y + 1);
+                current.bottom.top = current;
+            }
+            if (current.X > 0)
+            {
+                current.left = leftConn;
+                leftConn.right = current;
+            }
+
             if (current.X >= width - 1 && current.Y >= height - 1) return;
             // or recurse with the inhereted size and new current/prev.
-            else recursiveGridBuilder(width, height, current.bottom, current, current.bottom.left);
+            else recursiveGridBuilder(width, height, current.bottom, current.bottom.left);
         }
 
         private void reveal(int X, int Y)
