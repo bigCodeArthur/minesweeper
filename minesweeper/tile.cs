@@ -86,16 +86,35 @@ namespace minesweeper
             // or recurse with the inhereted size and new current/prev.
             else recursiveGridBuilder(width, height, current.bottom, current.bottom.left);
         }
-
-        private void reveal(int X, int Y)
+        /// <summary>
+        /// reveal all tiles that are guaranteed to not have bombs.
+        /// </summary>
+        /// <algo>
+        /// move into position and...
+        ///     start the recursion
+        /// </algo>
+        private bool reveal(int X, int Y)
         {
+            // move into position and...
             current = topLeft;
             while (current.X >= X) current = current.right;
             while (current.Y >= Y) current = current.bottom;
-            recursiveReveal(current);
+            // start the recursion.
+            if (!current.bomb) recursiveReveal(current);
+            else return true;
+            return false;
         }
+        /// <summary>
+        /// the recursive halve of the reveal methods
+        /// </summary>
+        /// <algo>
+        /// reveal and count the bombs.
+        /// 
+        /// then recurse to all cardinal neighbors.
+        /// </algo>
         private void recursiveReveal(tile input)
         {
+            
             if (countAndRevealBombs(input) > 0) return;
             else
             {
@@ -111,7 +130,9 @@ namespace minesweeper
         /// <algo>
         /// reveal tile.
         /// 
-        /// check for bombs in the cardinal(vertical and horizontal) and ordinal(corner) directions
+        /// check for bombs in the cardinal(vertical and horizontal) and ordinal(corner) directions.
+        /// 
+        /// store and return the amount.
         /// </algo>
         private int countAndRevealBombs(tile input)
         {
