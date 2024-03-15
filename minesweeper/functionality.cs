@@ -12,12 +12,15 @@ namespace minesweeper
         internal static void dig(Point position, grid gr, Size size)
         {
             // Calculate panel size
-            int panelWidth = panel1.Width;
-            int panelHeight = panel1.Height;
+            int panelWidth = size.Width;
+            int panelHeight = size.Height;
+
+            int TileWidth = panelWidth / gr.width;
+            int TileHeight = panelHeight / gr.height;
 
             // Calculate tile index based on mouse position
-            int tileX = (int)((float)e.X / panelWidth * (float)panelWidth / TileWidth);
-            int tileY = (int)((float)e.Y / panelHeight * (float)panelHeight / TileHeight);
+            int tileX = (int)(position.X / panelWidth * (float)panelWidth / TileWidth);
+            int tileY = (int)(position.Y / panelHeight * (float)panelHeight / TileHeight);
 
             gr.reveal(tileX, tileY);
         }

@@ -101,8 +101,8 @@ namespace minesweeper
         {
             // move into position and...
             current = topLeft;
-            while (current.X >= X) current = current.right;
-            while (current.Y >= Y) current = current.bottom;
+            while (current.X <= X) current = current.right;
+            while (current.Y <= Y) current = current.bottom;
             // start the recursion.
             if (!current.bomb) recursiveReveal(current);
             else return true;
