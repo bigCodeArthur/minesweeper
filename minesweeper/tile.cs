@@ -31,11 +31,11 @@ namespace minesweeper
     public class grid
     {
         // size.
-        int width;
-        int height;
+        public int width;
+        public int height;
         // reference points.
-        tile topLeft;
-        tile current;
+        public tile topLeft;
+        public tile current;
         public grid(int width, int height)
         {
             this.width = width;
@@ -58,33 +58,37 @@ namespace minesweeper
         /// </algo>
         private void recursiveGridBuilder(int width, int height, tile current, tile leftConn)
         {
-            // reset to top and shift to the right when reaching the vertical limit
-            if (current.Y >= height)
-            {
-                // reset to top.
-                while (current.top != null) current = current.top;
-                // shift right.
-                current.right = new tile(current.X + 1, 0);
-                leftConn = current;
-                current = current.right;
-                current.left = leftConn;
-            }
-            // add tile to the current's bottom.
-            if (current.Y < height)
-            {
-                current.bottom = new tile(current.X, current.Y + 1);
-                current.bottom.top = current;
-            }
+            tile nextLeft = null;
             // connect the tile horizontally if there is a tile to the left.
             if (current.X > 0)
             {
                 current.left = leftConn;
                 leftConn.right = current;
+                nextLeft = leftConn.bottom;
             }
+            // reset to top and shift to the right when reaching the vertical limit
+            if (current.Y >= height)
+            {
+                // reset to top.
+                while (current.top != null) current = current.top;
+                // shift and connect right.
+                current.right = new tile(current.X + 1, 0);
+                leftConn = current;
+                current = current.right;
+                current.left = leftConn;
+                nextLeft = leftConn.bottom;
+            }
+            // add and connect tile to the current's bottom.
+            if (current.Y < height)
+            {
+                current.bottom = new tile(current.X, current.Y + 1);
+                current.bottom.top = current;
+            }
+           
 
             if (current.X >= width - 1 && current.Y >= height - 1) return;
             // or recurse with the inhereted size and new current/prev.
-            else recursiveGridBuilder(width, height, current.bottom, current.bottom.left);
+            else recursiveGridBuilder(width, height, current.bottom, nextLeft);
         }
         /// <summary>
         /// reveal all tiles that are guaranteed to not have bombs.
@@ -93,7 +97,7 @@ namespace minesweeper
         /// move into position and...
         ///     start the recursion
         /// </algo>
-        private bool reveal(int X, int Y)
+        public bool reveal(int X, int Y)
         {
             // move into position and...
             current = topLeft;
@@ -154,6 +158,38 @@ namespace minesweeper
             // return counted bombs.
             input.surroundingBombs = bombs;
             return bombs;
+        }
+        /// <summary>
+        /// move the Current tile to a "next" tile that in time goes through all tiles.
+        /// </summary>
+        /// <algo>
+        /// store the output(being the current value).
+        /// 
+        /// (then move to the next tile by the following logic)
+        /// 
+        /// when on an even row...
+        ///     move to the right.
+        ///     when reaching the right end...
+        ///         move down.
+        /// 
+        /// when on an uneven row...
+        ///     move to the left.
+        ///     men reaching the left end...
+        ///         move down.
+        ///         
+        /// return the output.
+        /// </algo>
+        public tile next()
+        {
+            tile output = current;
+
+            if (current.Y % 2 == 0) if (current.right == null) current = current.bottom;
+            else current = current.right;
+
+            else if (current.left == null) current = current.bottom;
+            else current = current.left;
+
+            return output;
         }
     }
 }

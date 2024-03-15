@@ -15,28 +15,28 @@ namespace minesweeper
     {
         Graphics g;
         Pen p;
-        Point size = new Point();
+        Size size = new Size();
+        grid gr;
         public Form1()
         {
             InitializeComponent();
             g = pnlCanvas.CreateGraphics();
             p = new Pen(Color.Red);
         }
-        
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
-        }
 
         private void pnlCanvas_Click(object sender, EventArgs e)
         {
-
+            g.Clear(SystemColors.ButtonShadow);
+            visuals.drawField(g, p, size, pnlCanvas.Size, gr);
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            size.X = (int)numWidth.Value;
-            size.Y = (int)numHeight.Value;
+            g.Clear(SystemColors.ButtonShadow);
+            size.Width = (int)numWidth.Value;
+            size.Height = (int)numHeight.Value;
+            gr = new grid((int)numWidth.Value, (int)numHeight.Value);
+            visuals.drawField(g, p, size, pnlCanvas.Size, gr);
         }
     }
 }
