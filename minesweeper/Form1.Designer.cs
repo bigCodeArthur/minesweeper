@@ -46,9 +46,10 @@
             this.pnlCanvas.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlCanvas.Location = new System.Drawing.Point(0, 0);
             this.pnlCanvas.Name = "pnlCanvas";
-            this.pnlCanvas.Size = new System.Drawing.Size(441, 494);
+            this.pnlCanvas.Size = new System.Drawing.Size(466, 494);
             this.pnlCanvas.TabIndex = 0;
             this.pnlCanvas.Click += new System.EventHandler(this.pnlCanvas_Click);
+            this.pnlCanvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlCanvas_MouseClick);
             // 
             // flowLayoutPanel1
             // 
@@ -58,9 +59,9 @@
             this.flowLayoutPanel1.Controls.Add(this.numHeight);
             this.flowLayoutPanel1.Controls.Add(this.btnStart);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(447, 0);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(469, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(231, 494);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(209, 494);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // lblwidth
