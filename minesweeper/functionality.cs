@@ -10,10 +10,14 @@ namespace minesweeper
     internal class functionality
     {
         /// <summary>
-        /// 
+        /// turns the location of the mouse on the canvas into a usable X and Y index to reveal the tile.
         /// </summary>
         /// <algo>
+        /// calculate canvas size.
         /// 
+        /// calculate tile size.
+        /// 
+        /// position / tile size = usable index.
         /// </algo>
         internal static void dig(Point position, grid gr, Size size)
         {
