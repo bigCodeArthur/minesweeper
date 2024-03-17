@@ -9,6 +9,12 @@ namespace minesweeper
 {
     internal class functionality
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <algo>
+        /// 
+        /// </algo>
         internal static void dig(Point position, grid gr, Size size)
         {
             // Calculate panel size
