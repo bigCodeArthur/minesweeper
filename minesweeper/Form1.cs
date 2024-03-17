@@ -24,11 +24,6 @@ namespace minesweeper
             p = new Pen(Color.Red);
         }
 
-        private void pnlCanvas_Click(object sender, EventArgs e)
-        {
-           
-        }
-
         private void btnStart_Click(object sender, EventArgs e)
         {
             g.Clear(SystemColors.ButtonShadow);

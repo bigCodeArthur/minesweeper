@@ -48,7 +48,6 @@
             this.pnlCanvas.Name = "pnlCanvas";
             this.pnlCanvas.Size = new System.Drawing.Size(466, 494);
             this.pnlCanvas.TabIndex = 0;
-            this.pnlCanvas.Click += new System.EventHandler(this.pnlCanvas_Click);
             this.pnlCanvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlCanvas_MouseClick);
             // 
             // flowLayoutPanel1
