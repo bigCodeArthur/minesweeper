@@ -82,7 +82,7 @@
             this.numWidth.Size = new System.Drawing.Size(95, 35);
             this.numWidth.TabIndex = 1;
             this.numWidth.Value = new decimal(new int[] {
-            5,
+            10,
             0,
             0,
             0});
@@ -105,7 +105,7 @@
             this.numHeight.Size = new System.Drawing.Size(91, 35);
             this.numHeight.TabIndex = 3;
             this.numHeight.Value = new decimal(new int[] {
-            5,
+            10,
             0,
             0,
             0});
