@@ -13,6 +13,7 @@ namespace minesweeper
 {
     public partial class Form1 : Form
     {
+        Random rng = new Random();
         Graphics g;
         Pen p;
         Size size = new Size();
@@ -30,6 +31,7 @@ namespace minesweeper
             size.Width = (int)numWidth.Value;
             size.Height = (int)numHeight.Value;
             gr = new grid((int)numWidth.Value, (int)numHeight.Value);
+            functionality.spreadMines(gr, rng, (gr.width * gr.height) / 6);
             visuals.drawField(g, p, size, pnlCanvas.Size, gr);
         }
 

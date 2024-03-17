@@ -34,5 +34,26 @@ namespace minesweeper
 
             gr.reveal(tileX, tileY);
         }
+        /// <summary>
+        /// spreads a set amount of mines in a minesweeper grid.
+        /// </summary>
+        /// <algo>
+        /// 
+        /// </algo>
+        internal static void spreadMines(grid gr, Random rng, int inputM)
+        {
+            int mines = inputM;
+            gr.current = gr.topLeft;
+            while (mines > 0)
+            {
+                gr.next();
+                if (rng.Next(0, 30) < 5)
+                {
+                    gr.current.bomb = true;
+                    mines--;
+                }
+                if (gr.current.X == gr.width-1 && gr.current.Y == gr.height - 1) gr.current = gr.topLeft;
+            }
+        }
     }
 }
