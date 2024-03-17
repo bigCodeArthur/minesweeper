@@ -19,8 +19,8 @@ namespace minesweeper
             int TileHeight = panelHeight / gr.height;
 
             // Calculate tile index based on mouse position
-            int tileX = (int)(position.X / panelWidth * (float)panelWidth / TileWidth);
-            int tileY = (int)(position.Y / panelHeight * (float)panelHeight / TileHeight);
+            int tileX = 2;
+            int tileY = 2;
 
             gr.reveal(tileX, tileY);
         }

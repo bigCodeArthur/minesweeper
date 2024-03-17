@@ -101,8 +101,8 @@ namespace minesweeper
         {
             // move into position and...
             current = topLeft;
-            while (current.X <= X) current = current.right;
-            while (current.Y <= Y) current = current.bottom;
+            while (current.X < X) current = current.right;
+            while (current.Y < Y) current = current.bottom;
             // start the recursion.
             if (!current.bomb) recursiveReveal(current);
             else return true;
@@ -122,10 +122,10 @@ namespace minesweeper
             if (countAndRevealBombs(input) > 0) return;
             else
             {
-                recursiveReveal(input.top);
-                recursiveReveal(input.right);
-                recursiveReveal(input.bottom);
-                recursiveReveal(input.left);
+                if (input.top != null) if (!input.top.revealed) recursiveReveal(input.top);
+                if (input.right != null) if (!input.right.revealed) recursiveReveal(input.right);
+                if (input.bottom != null) if (!input.bottom.revealed) recursiveReveal(input.bottom);
+                if (input.left != null) if (!input.left.revealed) recursiveReveal(input.left);
             }
         }
         /// <summary>
@@ -146,15 +146,15 @@ namespace minesweeper
             input.revealed = true;
             // count all bombs.
             // check all cardinal bombs.
-            if (input.top.bomb) bombs++;
-            if (input.right.bomb) bombs++;
-            if (input.bottom.bomb) bombs++;
-            if (input.left.bomb) bombs++;
+            if (input.top != null) if (input.top.bomb) bombs++;
+            if (input.right != null) if (input.right.bomb) bombs++;
+            if (input.bottom != null) if (input.bottom.bomb) bombs++;
+            if (input.left != null) if (input.left.bomb) bombs++;
             // check all corner bombs.
-            if (input.top.right.bomb) bombs++;
-            if (input.right.bottom.bomb) bombs++;
-            if (input.bottom.left.bomb) bombs++;
-            if (input.left.top.bomb) bombs++;
+            if (input.top != null) if (input.top.right != null) if (input.top.right.bomb) bombs++;
+            if (input.right != null) if (input.right.bottom != null) if (input.right.bottom.bomb) bombs++;
+            if (input.bottom != null) if (input.bottom.left != null) if (input.bottom.left.bomb) bombs++;
+            if (input.left != null) if (input.left.top != null) if (input.left.top.bomb) bombs++;
             // return counted bombs.
             input.surroundingBombs = bombs;
             return bombs;
