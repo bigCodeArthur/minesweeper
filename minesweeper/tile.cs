@@ -36,6 +36,7 @@ namespace minesweeper
         // reference points.
         public tile topLeft;
         public tile current;
+
         public grid(int width, int height)
         {
             this.width = width;
@@ -84,7 +85,6 @@ namespace minesweeper
                 current.bottom = new tile(current.X, current.Y + 1);
                 current.bottom.top = current;
             }
-           
 
             if (current.X >= width - 1 && current.Y >= height - 1) return;
             // or recurse with the inhereted size and new current/prev.
@@ -105,8 +105,8 @@ namespace minesweeper
             while (current.Y < Y) current = current.bottom;
             // start the recursion.
             if (!current.bomb) recursiveReveal(current);
-            else return true;
-            return false;
+            else return false;
+            return true;
         }
         /// <summary>
         /// the recursive halve of the reveal methods

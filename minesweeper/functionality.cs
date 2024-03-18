@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,7 +33,7 @@ namespace minesweeper
             int tileX = position.X / TileWidth;
             int tileY = position.Y / TileHeight;
 
-            gr.reveal(tileX, tileY);
+            if(gr.reveal(tileX, tileY));
         }
         /// <summary>
         /// spreads a set amount of mines in a minesweeper grid.
