@@ -22,7 +22,7 @@ namespace minesweeper
         {
             InitializeComponent();
             g = pnlCanvas.CreateGraphics();
-            p = new Pen(Color.Red);
+            p = new Pen(Color.DarkOliveGreen);
         }
 
         private void btnStart_Click(object sender, EventArgs e)

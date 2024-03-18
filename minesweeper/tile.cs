@@ -51,23 +51,28 @@ namespace minesweeper
         /// <algo>
         /// reset to top and shift to the right when reaching the vertical limit
         /// 
+        /// exit recursion when reaching the vertical and horizontal limit.
+        ///     (placement is to make sure the last horizontal connection is made)
+        /// 
         /// add tile to the current's bottom.
         ///     connect the tile horizontally if there is a tile to the left.
         ///     
-        /// exit recursion when reaching the vertical and horizontal limit.
-        ///     or recurse with the inhereted size and new current/prev.
+        /// 
+        /// recurse with the inhereted size and new current/prev.
         /// </algo>
         private void recursiveGridBuilder(int width, int height, tile current, tile leftConn)
         {
-            if (current.X >= width - 1 && current.Y >= height - 1) return;
+            
             tile nextLeft = null;
             // connect the tile horizontally if there is a tile to the left.
             if (current.X > 0)
             {
                 current.left = leftConn;
                 leftConn.right = current;
-                nextLeft = leftConn.bottom;
+                if (leftConn.bottom != null) nextLeft = leftConn.bottom;
             }
+
+            if (current.X >= width - 1 && current.Y >= height - 1) return;
             // reset to top and shift to the right when reaching the vertical limit
             if (current.Y >= height - 1)
             {
@@ -151,7 +156,7 @@ namespace minesweeper
             if (input.right != null) if (input.right.bomb) bombs++;
             if (input.bottom != null) if (input.bottom.bomb) bombs++;
             if (input.left != null) if (input.left.bomb) bombs++;
-            // check all corner bombs.
+            // check all ordinal bombs.
             if (input.top != null) if (input.top.right != null) if (input.top.right.bomb) bombs++;
             if (input.right != null) if (input.right.bottom != null) if (input.right.bottom.bomb) bombs++;
             if (input.bottom != null) if (input.bottom.left != null) if (input.bottom.left.bomb) bombs++;
@@ -187,18 +192,14 @@ namespace minesweeper
         public tile next()
         {
             tile output = current;
-            // if the grid height is uneven the end point is at the most right-bottom corner.
-            if (height%2 != 0 && current.X == width - 1 && current.Y == height - 1) current = topLeft;
-            // if the grid height is even the end point is at the most left-bottom corner.
-            if (height%2 == 0 && current.X == 0 && current.Y == height - 1) current = topLeft;
-
-
 
             if (current.Y % 2 == 0) if (current.right == null) current = current.bottom;
             else current = current.right;
 
             else if (current.left == null) current = current.bottom;
             else current = current.left;
+
+            if (current == null) current = topLeft;
 
             return output;
         }
