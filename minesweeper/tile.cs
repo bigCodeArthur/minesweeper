@@ -188,9 +188,9 @@ namespace minesweeper
         {
             tile output = current;
             // if the grid height is uneven the end point is at the most right-bottom corner.
-            if (height%2 != 0 && current.X == width - 1 && current.Y == height - 1) gr.current = gr.topLeft;
+            if (height%2 != 0 && current.X == width - 1 && current.Y == height - 1) current = topLeft;
             // if the grid height is even the end point is at the most left-bottom corner.
-            if (height%2 == 0 && current.X == 0 && current.Y == height - 1) gr.current = gr.topLeft;
+            if (height%2 == 0 && current.X == 0 && current.Y == height - 1) current = topLeft;
 
 
 
