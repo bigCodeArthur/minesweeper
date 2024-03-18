@@ -31,7 +31,7 @@ namespace minesweeper
             size.Width = (int)numWidth.Value;
             size.Height = (int)numHeight.Value;
             gr = new grid((int)numWidth.Value, (int)numHeight.Value);
-            functionality.spreadMines(gr, rng, (gr.width * gr.height) / 5);
+            functionality.spreadMines(gr, rng, (gr.width * gr.height) / 6);
             visuals.drawField(g, p, size, pnlCanvas.Size, gr);
         }
 
