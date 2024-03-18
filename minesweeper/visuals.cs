@@ -15,9 +15,8 @@ namespace minesweeper
             int tileWidth = (panelSize.Width / size.Width);
             int tileHeight = (panelSize.Height / size.Height);
             Size tileSize = new Size(tileWidth, tileHeight);
-            Font f = SystemFonts.DialogFont;
-            f.Bold = true;
-            f.Size = tileSize;
+            int fontSize = Math.Min((tileWidth / 3) * 2, (tileHeight / 3) * 2);
+            Font f = new Font(FontFamily.GenericSerif, fontSize);
             // draw tiles.
             gr.current = gr.topLeft;
             for (int i = 0; i < gr.width * gr.height; i++) drawTile(g, p, f, gr.next(), tileSize);
@@ -30,8 +29,7 @@ namespace minesweeper
 
         private static void drawTile(Graphics g, Pen p, Font f, tile current, Size tileSize)
         {
-            Brush b = new SolidBrush(Color.Brown);
-            Brush r = new SolidBrush(Color.Red);
+            Brush b = new SolidBrush(Color.Black);
             Brush w = new SolidBrush(Color.White);
 
             
