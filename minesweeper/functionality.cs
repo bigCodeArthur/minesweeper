@@ -53,7 +53,7 @@ namespace minesweeper
                     gr.current.bomb = true;
                     mines--;
                 }
-                if (gr.current.X == gr.width-1 && gr.current.Y == gr.height - 1) gr.current = gr.topLeft;
+                
             }
         }
     }

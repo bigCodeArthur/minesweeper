@@ -59,6 +59,7 @@ namespace minesweeper
         /// </algo>
         private void recursiveGridBuilder(int width, int height, tile current, tile leftConn)
         {
+            if (current.X >= width - 1 && current.Y >= height - 1) return;
             tile nextLeft = null;
             // connect the tile horizontally if there is a tile to the left.
             if (current.X > 0)
@@ -68,11 +69,11 @@ namespace minesweeper
                 nextLeft = leftConn.bottom;
             }
             // reset to top and shift to the right when reaching the vertical limit
-            if (current.Y >= height)
+            if (current.Y >= height - 1)
             {
                 // reset to top.
                 while (current.top != null) current = current.top;
-                // shift and connect right.
+                // create, shift and connect right.
                 current.right = new tile(current.X + 1, 0);
                 leftConn = current;
                 current = current.right;
@@ -80,15 +81,15 @@ namespace minesweeper
                 nextLeft = leftConn.bottom;
             }
             // add and connect tile to the current's bottom.
-            if (current.Y < height)
+            if (current.Y < height - 1)
             {
                 current.bottom = new tile(current.X, current.Y + 1);
                 current.bottom.top = current;
             }
 
-            if (current.X >= width - 1 && current.Y >= height - 1) return;
+            
             // or recurse with the inhereted size and new current/prev.
-            else recursiveGridBuilder(width, height, current.bottom, nextLeft);
+            recursiveGridBuilder(width, height, current.bottom, nextLeft);
         }
         /// <summary>
         /// reveal all tiles that are guaranteed to not have bombs.
@@ -163,6 +164,10 @@ namespace minesweeper
         /// move the Current tile to a "next" tile that in time goes through all tiles.
         /// </summary>
         /// <algo>
+        /// if the grid height is uneven the end point is at the most right-bottom corner...
+        ///     and if the grid height is even the end point is at the most left-bottom corner.
+        ///         return when it hits that point
+        ///         
         /// store the output(being the current value).
         /// 
         /// (then move to the next tile by the following logic)
@@ -182,6 +187,12 @@ namespace minesweeper
         public tile next()
         {
             tile output = current;
+            // if the grid height is uneven the end point is at the most right-bottom corner.
+            if (height%2 != 0 && current.X == width - 1 && current.Y == height - 1) gr.current = gr.topLeft;
+            // if the grid height is even the end point is at the most left-bottom corner.
+            if (height%2 == 0 && current.X == 0 && current.Y == height - 1) gr.current = gr.topLeft;
+
+
 
             if (current.Y % 2 == 0) if (current.right == null) current = current.bottom;
             else current = current.right;
