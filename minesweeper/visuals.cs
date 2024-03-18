@@ -35,7 +35,6 @@ namespace minesweeper
             if (current.revealed) {
                 g.FillRectangle(w, (float)current.X * tileSize.Width, (float)current.Y * tileSize.Height, tileSize.Width, tileSize.Height);
                 if (current.surroundingBombs > 0) g.DrawString("" + current.surroundingBombs, f, b, (float)current.X * tileSize.Width, (float)current.Y * tileSize.Height);
-                
             }
         }
     }
