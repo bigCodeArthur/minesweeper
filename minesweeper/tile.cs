@@ -105,6 +105,7 @@ namespace minesweeper
         /// </algo>
         public bool reveal(int X, int Y)
         {
+            if (X >= width || Y >= height) return false;
             // move into position and...
             current = topLeft;
             while (current.X < X) current = current.right;

@@ -27,7 +27,6 @@ namespace minesweeper
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            g.Clear(SystemColors.ButtonShadow);
             size.Width = (int)numWidth.Value;
             size.Height = (int)numHeight.Value;
             gr = new grid((int)numWidth.Value, (int)numHeight.Value);
@@ -40,9 +39,13 @@ namespace minesweeper
             if (gr != null)
             {
                 functionality.dig(e.Location, gr, pnlCanvas.Size);
-                g.Clear(SystemColors.ButtonShadow);
                 visuals.drawField(g, p, size, pnlCanvas.Size, gr);
             }
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            if (gr != null) visuals.drawField(g, p, size, pnlCanvas.Size, gr);
         }
     }
 }
