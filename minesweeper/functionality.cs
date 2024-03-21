@@ -58,7 +58,19 @@ namespace minesweeper
                 }
             }
         }
-
+        /// <summary>
+        /// go and count through all tiles and to determine a win.
+        /// </summary>
+        /// <algo>
+        /// store revealed tiles.
+        /// 
+        /// count revealed tiles.
+        /// 
+        /// if revealed tiles is all tiles - bomb tiles...
+        ///     return true.
+        /// else...
+        ///     return false.
+        /// </algo>
         internal static bool winConCheck(grid gr)
         {
             int revealed = 0;

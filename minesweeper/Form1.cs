@@ -42,10 +42,10 @@ namespace minesweeper
             if (gr != null)
             {
                 if (functionality.dig(e.Location, gr, pnlCanvas.Size)) 
-                    if (MessageBox.Show("BOOM!", "XXX", MessageBoxButtons.RetryCancel) == DialogResult.Retry) generateField();
+                    if (MessageBox.Show("BOOM!", "Loss", MessageBoxButtons.RetryCancel) == DialogResult.Retry) generateField();
                     else Application.Exit();
                 if (functionality.winConCheck(gr)) 
-                    if (MessageBox.Show("YIPPIE!", "XXX", MessageBoxButtons.RetryCancel) == DialogResult.Retry) generateField();
+                    if (MessageBox.Show("YIPPIE!", "Win", MessageBoxButtons.RetryCancel) == DialogResult.Retry) generateField();
                     else Application.Exit();
                 visuals.drawField(g, p, size, pnlCanvas.Size, gr);
             }
