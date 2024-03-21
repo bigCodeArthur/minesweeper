@@ -27,18 +27,26 @@ namespace minesweeper
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            generateField();
+        }
+        private void generateField()
+        {
             size.Width = (int)numWidth.Value;
             size.Height = (int)numHeight.Value;
             gr = new grid(size.Width, size.Height);
-            functionality.spreadMines(gr, rng, (gr.width * gr.height) / 6);
+            functionality.spreadMines(gr, rng, gr.allBombs);
             visuals.drawField(g, p, size, pnlCanvas.Size, gr);
         }
-
         private void pnlCanvas_MouseClick(object sender, MouseEventArgs e)
         {
             if (gr != null)
             {
-                functionality.dig(e.Location, gr, pnlCanvas.Size);
+                if (functionality.dig(e.Location, gr, pnlCanvas.Size)) 
+                    if (MessageBox.Show("BOOM!", "XXX", MessageBoxButtons.RetryCancel) == DialogResult.Retry) generateField();
+                    else Application.Exit();
+                if (functionality.winConCheck(gr)) 
+                    if (MessageBox.Show("YIPPIE!", "XXX", MessageBoxButtons.RetryCancel) == DialogResult.Retry) generateField();
+                    else Application.Exit();
                 visuals.drawField(g, p, size, pnlCanvas.Size, gr);
             }
         }

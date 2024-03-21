@@ -11,7 +11,7 @@ namespace minesweeper
     internal class functionality
     {
         /// <summary>
-        /// turns the location of the mouse on the canvas into a usable X and Y index to reveal the tile.
+        /// turns the location of the mouse on the canvas into a usable X and Y index to reveal the tile, also returns true on bombs.
         /// </summary>
         /// <algo>
         /// calculate canvas size.
@@ -19,8 +19,10 @@ namespace minesweeper
         /// calculate tile size.
         /// 
         /// position / tile size = usable index.
+        /// 
+        /// returns true if the player digs into a bomb.
         /// </algo>
-        internal static void dig(Point position, grid gr, Size size)
+        internal static bool dig(Point position, grid gr, Size size)
         {
             // Calculate panel size
             int panelWidth = size.Width;
@@ -33,7 +35,8 @@ namespace minesweeper
             int tileX = position.X / TileWidth;
             int tileY = position.Y / TileHeight;
 
-            if(gr.reveal(tileX, tileY));
+            if(gr.reveal(tileX, tileY)) return true;
+            else return false;
         }
         /// <summary>
         /// spreads a set amount of mines in a minesweeper grid.
@@ -53,8 +56,15 @@ namespace minesweeper
                     gr.current.bomb = true;
                     mines--;
                 }
-                
             }
+        }
+
+        internal static bool winConCheck(grid gr)
+        {
+            int revealed = 0;
+            for (int i = 0; i < gr.width * gr.height; i++) if (gr.next().revealed) revealed++;
+            if (revealed == (gr.width * gr.height) - gr.allBombs) return true;
+            return false;
         }
     }
 }

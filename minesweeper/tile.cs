@@ -8,13 +8,14 @@ using System.Threading.Tasks;
 namespace minesweeper
 {
     public class tile
-    {
+    {   
         // a tile is connected to other tile on the cardinal directions.
         public tile top = null;
         public tile bottom = null;
         public tile left = null;
         public tile right = null;
         // some tiles have bombs and some do not.
+        
         public bool bomb = false;
         // some tiles are revealed and some are not.
         public bool revealed = false;
@@ -33,12 +34,15 @@ namespace minesweeper
         // size.
         public int width;
         public int height;
+        // all bombs.
+        public int allBombs;
         // reference points.
         public tile topLeft;
         public tile current;
 
         public grid(int width, int height)
         {
+            this.allBombs = width * height / 6;
             this.width = width;
             this.height = height;
             this.topLeft = new tile(0, 0);
@@ -49,14 +53,15 @@ namespace minesweeper
         /// a method to recursively build a grid with the top-left tile as the beginning (0 index);
         /// </summary>
         /// <algo>
-        /// reset to top and shift to the right when reaching the vertical limit
+        /// connect the tile horizontally if there is a tile to the left.
+        ///     (placement is to make sure the last horizontal connection is made before exiting recursion)
+        /// 
+        /// reset to top and shift to the right when reaching the vertical limit.
+        ///     (a horizontal connection is also made)
         /// 
         /// exit recursion when reaching the vertical and horizontal limit.
-        ///     (placement is to make sure the last horizontal connection is made)
         /// 
         /// add tile to the current's bottom.
-        ///     connect the tile horizontally if there is a tile to the left.
-        ///     
         /// 
         /// recurse with the inhereted size and new current/prev.
         /// </algo>
@@ -72,7 +77,9 @@ namespace minesweeper
                 if (leftConn.bottom != null) nextLeft = leftConn.bottom;
             }
 
+            // exit recursion when reaching the vertical and horizontal limit.
             if (current.X >= width - 1 && current.Y >= height - 1) return;
+
             // reset to top and shift to the right when reaching the vertical limit
             if (current.Y >= height - 1)
             {
@@ -85,6 +92,7 @@ namespace minesweeper
                 current.left = leftConn;
                 nextLeft = leftConn.bottom;
             }
+
             // add and connect tile to the current's bottom.
             if (current.Y < height - 1)
             {
@@ -92,7 +100,6 @@ namespace minesweeper
                 current.bottom.top = current;
             }
 
-            
             // or recurse with the inhereted size and new current/prev.
             recursiveGridBuilder(width, height, current.bottom, nextLeft);
         }
@@ -101,7 +108,7 @@ namespace minesweeper
         /// </summary>
         /// <algo>
         /// move into position and...
-        ///     start the recursion
+        ///     start the recursion.
         /// </algo>
         public bool reveal(int X, int Y)
         {
@@ -111,12 +118,12 @@ namespace minesweeper
             while (current.X < X) current = current.right;
             while (current.Y < Y) current = current.bottom;
             // start the recursion.
-            if (!current.bomb) recursiveReveal(current);
-            else return false;
-            return true;
+            if (current.bomb) return true;
+            else recursiveReveal(current);
+            return false;
         }
         /// <summary>
-        /// the recursive halve of the reveal methods
+        /// the recursive halve of the reveal methods.
         /// </summary>
         /// <algo>
         /// reveal and count the bombs.
