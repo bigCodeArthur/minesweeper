@@ -48,7 +48,7 @@
             this.pnlCanvas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCanvas.Location = new System.Drawing.Point(3, 3);
             this.pnlCanvas.Name = "pnlCanvas";
-            this.pnlCanvas.Size = new System.Drawing.Size(1310, 946);
+            this.pnlCanvas.Size = new System.Drawing.Size(649, 463);
             this.pnlCanvas.TabIndex = 0;
             this.pnlCanvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlCanvas_MouseClick);
             // 
@@ -60,9 +60,9 @@
             this.flowLayoutPanel1.Controls.Add(this.numHeight);
             this.flowLayoutPanel1.Controls.Add(this.btnStart);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(1319, 3);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(658, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(294, 946);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(294, 463);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // lblwidth
@@ -153,13 +153,13 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1616, 952);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(955, 469);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1616, 952);
+            this.ClientSize = new System.Drawing.Size(955, 469);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(2);
