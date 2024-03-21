@@ -29,7 +29,7 @@ namespace minesweeper
         {
             size.Width = (int)numWidth.Value;
             size.Height = (int)numHeight.Value;
-            gr = new grid((int)numWidth.Value, (int)numHeight.Value);
+            gr = new grid(size.Width, size.Height);
             functionality.spreadMines(gr, rng, (gr.width * gr.height) / 6);
             visuals.drawField(g, p, size, pnlCanvas.Size, gr);
         }
@@ -45,6 +45,13 @@ namespace minesweeper
 
         private void Form1_Resize(object sender, EventArgs e)
         {
+            g = pnlCanvas.CreateGraphics();
+            if (gr != null) visuals.drawField(g, p, size, pnlCanvas.Size, gr);
+        }
+
+        private void Form1_Validated(object sender, EventArgs e)
+        {
+            g = pnlCanvas.CreateGraphics();
             if (gr != null) visuals.drawField(g, p, size, pnlCanvas.Size, gr);
         }
     }

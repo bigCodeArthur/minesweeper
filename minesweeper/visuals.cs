@@ -18,15 +18,15 @@ namespace minesweeper
             int fontSize =  Math.Min((tileWidth / 3) * 2, (tileHeight / 3) * 2);
             if (fontSize <= 0) fontSize = 1;
             Font f = new Font(FontFamily.GenericSerif, fontSize);
-            // draw grid.
-                // vertical
-            for (int i = 0; i < size.Width + 1; i++) g.DrawLine(p, tileWidth * i, 0, tileWidth * i, tileHeight * size.Height - 1);
-                // horizontal
-            for (int i = 0; i < size.Height; i++) g.DrawLine(p, 0, tileHeight * i, tileWidth * size.Width, tileHeight * i);
+           
             // draw tiles.
             gr.current = gr.topLeft;
             for (int i = 0; i < gr.width * gr.height; i++) drawTile(g, p, f, gr.next(), tileSize);
-            
+            // draw grid.
+            // vertical
+            for (int i = 0; i < size.Width + 1; i++) g.DrawLine(p, tileWidth * i, 0, tileWidth * i, tileHeight * size.Height - 1);
+            // horizontal
+            for (int i = 0; i < size.Height + 1; i++) g.DrawLine(p, 0, tileHeight * i, tileWidth * size.Width, tileHeight * i);
         }
 
         private static void drawTile(Graphics g, Pen p, Font f, tile current, Size tileSize)

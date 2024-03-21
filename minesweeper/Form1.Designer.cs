@@ -158,6 +158,7 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Form1";
             this.Resize += new System.EventHandler(this.Form1_Resize);
+            this.Validated += new System.EventHandler(this.Form1_Validated);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numWidth)).EndInit();
